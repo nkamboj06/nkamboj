@@ -1,48 +1,46 @@
 ---
 authors:
 - admin
-bio: My research interests include distributed robotics, mobile computing and programmable
-  matter.
+bio: My research interests include cardiovascular health, kidney disease, and using technology to optimize patient safety and health outcomes.  
 education:
   courses:
-  - course: PhD in Artificial Intelligence
-    institution: Stanford University
-    year: 2012
-  - course: MEng in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2009
-  - course: BSc in Artificial Intelligence
-    institution: Massachusetts Institute of Technology
-    year: 2008
-email: ""
+  - course: PhD in Nursing (Student)
+    institution: University of Toronto
+    year: 2023
+  - course: Master of Science in Nursing
+    institution: Western University
+    year: 2019
+  - course: Bachelor of Science in Nursing
+    institution: Ryerson University
+    year: 2017
+email: "navpreet.kamboj@mail.utoronto.ca"
 interests:
-- Artificial Intelligence
-- Computational Linguistics
-- Information Retrieval
+- Cardiovascular Health
+- Kidney Disease
+- Data Science
+- Machine Learning
 organizations:
-- name: Stanford University
-  url: ""
-role: Professor of Artificial Intelligence
+- name: University of Toronto
+  url: "https://www.utoronto.ca/"
+role: PhD Student
 social:
 - icon: envelope
   icon_pack: fas
   link: '#contact'
 - icon: twitter
   icon_pack: fab
-  link: https://twitter.com/GeorgeCushen
+  link: https://twitter.com/nkkamboj
 - icon: google-scholar
-  icon_pack: ai
-  link: https://scholar.google.co.uk/citations?user=sIwtMXoAAAAJ
+  icon_pack: 
+  link: 
 - icon: github
   icon_pack: fab
-  link: https://github.com/gcushen
+  link: https://github.com/nkamboj06
 superuser: true
-title: Nelson Bighetti
+title: Navpreet Kamboj
 user_groups:
 - Researchers
 - Visitors
 ---
 
-Nelson Bighetti is a professor of artificial intelligence at the Stanford AI Lab. His research interests include distributed robotics, mobile computing and programmable matter. He leads the Robotic Neurobiology group, which develops self-reconfiguring robots, systems of self-organizing robots, and mobile sensor networks.
-
-Lorem ipsum dolor sit amet, consectetur adipiscing elit. Sed neque elit, tristique placerat feugiat ac, facilisis vitae arcu. Proin eget egestas augue. Praesent ut sem nec arcu pellentesque aliquet. Duis dapibus diam vel metus tempus vulputate.
+Navpreet Kamboj is a student in the PhD program at the Lawrence S. Bloomberg Faculty of Nursing, University of Toronto. Her research interests include chronic kidney disease, cardiovascular health, and utilizing technology to optimize patient and staff outcomes. Navpreet is a registered nurse in Ontario and currently working as a bundled care navigator at Trillium Health Partners.
