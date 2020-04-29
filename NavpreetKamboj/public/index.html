@@ -38,7 +38,7 @@
   
   
   
-  <meta name="theme-color" content="#2962ff">
+  <meta name="theme-color" content="rgb(0, 136, 204)">
   
 
   
@@ -62,8 +62,8 @@
       
       
         
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light">
-          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/github.min.css" crossorigin="anonymous" title="hl-light" disabled>
+          <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/highlight.js/9.18.1/styles/dracula.min.css" crossorigin="anonymous" title="hl-dark">
         
       
     
@@ -191,7 +191,7 @@
   
   
   
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Montserrat:400,700%7CRoboto:400,400italic,700%7CRoboto+Mono&display=swap">
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css?family=Cutive+Mono%7CLora:400,700%7CRoboto:400,700&display=swap">
   
 
   
@@ -280,7 +280,7 @@
 
 </head>
 
-<body id="top" data-spy="scroll" data-offset="70" data-target="#navbar-main" >
+<body id="top" data-spy="scroll" data-offset="70" data-target="#navbar-main" class="dark">
 
   <aside class="search-results" id="search">
   <div class="container">
@@ -434,6 +434,33 @@
 
         <li class="nav-item">
           <a class="nav-link " href="./#projects" data-target="#projects"><span>Research</span></a>
+        </li>
+
+        
+        
+
+        
+
+        
+        
+        
+
+        
+        
+        
+        
+        
+        
+          
+          
+          
+            
+          
+          
+        
+
+        <li class="nav-item">
+          <a class="nav-link " href="./#CV" data-target="#CV"><span>CV</span></a>
         </li>
 
         
@@ -1349,6 +1376,365 @@
     </div>
   </section>
 
+  
+  
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+  
+
+  
+  
+  
+  
+  
+
+  
+  
+
+  <section id="CV" class="home-section wg-blank   "  >
+    <div class="container">
+      
+
+
+<div class="row">
+  
+    <div class="col-12 col-lg-4 section-heading">
+      
+      
+    </div>
+    <div class="col-12 col-lg-8">
+      <pre><code class="language-{r">library(tidyverse)
+library(shiny)
+library(scholar)
+library(kableExtra)
+library(cvR)
+library(plotly)
+knitr::opts_chunk$set(echo = FALSE, warning = FALSE, message = FALSE, results = 'asis')
+library(rorcid)
+x  &lt;- &quot;dc7ea3ae-38fd-4188-8bd1-1db4215ea139&quot;
+Sys.setenv(ORCID_TOKEN=x, orcid_email=&quot;navpreet.kamboj@mail.utoronto.ca&quot;)
+</code></pre>
+<h1 id="i-classfas-fa-user-graduate-fa-fwi-education"><i class="fas fa-user-graduate fa-fw"></i> Education</h1>
+<pre><code class="language-{r">edu &lt;- rorcid::orcid_educations(params$orcid.id)
+edu &lt;- edu$`0000-0002-9583-8636`$`affiliation-group`$summaries
+
+edu &lt;- tibble(
+  organization = purrr::map_chr(edu, &quot;education-summary.organization.name&quot;),
+  title = purrr::map_chr(edu, &quot;education-summary.role-title&quot;),
+  start = purrr::map_chr(edu, &quot;education-summary.start-date.year.value&quot;),
+  end = purrr::map_chr(edu, &quot;education-summary.end-date.year.value&quot;),
+  city = purrr::map_chr(edu, &quot;education-summary.organization.address.city&quot;),
+  country = purrr::map_chr(edu, &quot;education-summary.organization.address.country&quot;))
+
+edu$time &lt;- glue::glue(&quot;{edu$start} - {edu$end}&quot;)
+edu$location &lt;- glue::glue(&quot;{edu$city}, {edu$country}&quot;) 
+glue::glue('&lt;br&gt;
+&lt;ul style=&quot;list-style-type:none;&quot;&gt;
+           &lt;li&gt;
+           &lt;em&gt;{edu$title}&lt;/em&gt;&lt;br&gt;{edu$organization}&lt;br&gt;{edu$location} &lt;span style=&quot;float:right;&quot;&gt;{edu$time}&lt;/span&gt;
+           &lt;/li&gt;
+           &lt;/ul&gt;')
+</code></pre>
+<h1 id="i-classfas-fa-briefcase-fa-fwi-employment"><i class="fas fa-briefcase fa-fw"></i> Employment</h1>
+<pre><code class="language-{r}">employ &lt;- rorcid::orcid_employments(params$orcid.id)
+
+currentFunction &lt;- function(x){
+  if(!is.null(employ$`0000-0002-9583-8636`$`affiliation-group`$summaries[[x]]$`employment-summary.end-date`)){
+    &quot;Current&quot;
+  } else {employ$`0000-0002-9583-8636`$`affiliation-group`$summaries[[x]]$`employment-summary.end-date.year.value`}
+}
+
+end_year &lt;- vapply(seq(1,length(employ$`0000-0002-9583-8636`$`affiliation-group`$summaries), by = 1), currentFunction, &quot;&quot;)
+
+employ &lt;- employ$`0000-0002-9583-8636`$`affiliation-group`$summaries
+
+employ &lt;- tibble(
+  organization = purrr::map_chr(employ, &quot;employment-summary.organization.name&quot;),
+  title = purrr::map_chr(employ, &quot;employment-summary.role-title&quot;),
+  start = purrr::map_chr(employ, &quot;employment-summary.start-date.year.value&quot;),
+  city = purrr::map_chr(employ, &quot;employment-summary.organization.address.city&quot;),
+  country = purrr::map_chr(employ, &quot;employment-summary.organization.address.country&quot;))
+
+employ$time &lt;- glue::glue(&quot;{employ$start} - {end_year}&quot;)
+employ$location &lt;- glue::glue(&quot;{employ$city}, {employ$country}&quot;) 
+
+glue::glue('&lt;br&gt;
+&lt;ul style=&quot;list-style-type:none;&quot;&gt;
+           &lt;li&gt;
+           &lt;em&gt;{employ$title}&lt;/em&gt;&lt;br&gt;{employ$organization}&lt;br&gt;{employ$location} &lt;span style=&quot;float:right;&quot;&gt;{employ$time}&lt;/span&gt;
+           &lt;/li&gt;
+           &lt;/ul&gt;')
+
+</code></pre>
+<h1 id="i-classfas-fa-file-certificate-fa-fwi-awards"><i class="fas fa-file-certificate fa-fw"></i> Awards</h1>
+<pre><code class="language-{r}">distinctions  &lt;- orcid_distinctions(params$orcid.id)
+distinctions &lt;- distinctions$`0000-0002-9583-8636`$`affiliation-group`$summaries
+distinctions &lt;- tibble(
+  organization = purrr::map_chr(distinctions, &quot;distinction-summary.organization.name&quot;),
+  title = purrr::map_chr(distinctions, &quot;distinction-summary.role-title&quot;),
+  time = purrr::map_chr(distinctions, &quot;distinction-summary.start-date.year.value&quot;))
+
+glue::glue('&lt;br&gt;
+&lt;ul style=&quot;list-style-type:none;&quot;&gt;
+           &lt;li&gt;
+           &lt;em&gt;{distinctions$title}&lt;/em&gt;&lt;br&gt;{distinctions$organization} &lt;span style=&quot;float:right;&quot;&gt;{distinctions$time}&lt;/span&gt;
+           &lt;/li&gt;
+           &lt;/ul&gt;')
+
+</code></pre>
+<h1 id="i-classfas-fa-users-class-fa-fwi-service"><i class="fas fa-users-class fa-fw"></i> Service</h1>
+<pre><code class="language-{r}">service  &lt;- orcid_services(params$orcid.id)
+
+currentFunction &lt;- function(x){
+  if(!is.null(service$`0000-0002-9583-8636`$`affiliation-group`$summaries[[x]]$`service-summary.end-date`)){
+    &quot;Current&quot;
+  } else {service$`0000-0002-9583-8636`$`affiliation-group`$summaries[[x]]$`service-summary.end-date.year.value`}
+}
+
+end_year &lt;- vapply(seq(1, length(service$`0000-0002-9583-8636`$`affiliation-group`$summaries), by = 1), currentFunction, &quot;&quot;)
+
+
+service  &lt;- service$`0000-0002-9583-8636`$`affiliation-group`$summaries
+service &lt;- tibble(
+  organization = purrr::map_chr(service, &quot;service-summary.organization.name&quot;),
+  title = purrr::map_chr(service, &quot;service-summary.role-title&quot;),
+  start = purrr::map_chr(service, &quot;service-summary.start-date.year.value&quot;))
+
+service$time &lt;- glue::glue(&quot;{service$start} - {end_year}&quot;) 
+
+service$time &lt;- glue::glue(&quot;{service$start} - {end_year}&quot;) 
+glue::glue('&lt;br&gt;
+&lt;ul style=&quot;list-style-type:none;&quot;&gt;
+           &lt;li&gt;
+           &lt;em&gt;{service$title}&lt;/em&gt;&lt;br&gt;{service$organization} &lt;span style=&quot;float:right;&quot;&gt;{service$time}&lt;/span&gt;
+           &lt;/li&gt;
+           &lt;/ul&gt;')
+</code></pre>
+<h1 id="i-classfas-fa-users-fa-fwi-memberships"><i class="fas fa-users fa-fw"></i> Memberships</h1>
+<pre><code class="language-{r}">membership  &lt;- orcid_memberships(params$orcid.id)
+
+currentFunction &lt;- function(x){
+  if(!is.null(membership$`0000-0002-9583-8636`$`affiliation-group`$summaries[[x]]$`membership-summary.end-date`)){
+    &quot;Current&quot;
+  } else {membership$`0000-0002-9583-8636`$`affiliation-group`$summaries[[x]]$`membership-summary.end-date.year.value`}
+}
+
+end_year &lt;- vapply(seq(1, length(membership$`0000-0002-9583-8636`$`affiliation-group`$summaries), by = 1), currentFunction, &quot;&quot;)
+
+membership &lt;- membership$`0000-0002-9583-8636`$`affiliation-group`$summaries 
+
+membership &lt;- tibble(
+  organization = purrr::map_chr(membership, &quot;membership-summary.organization.name&quot;),
+  title = purrr::map_chr(membership, &quot;membership-summary.role-title&quot;),
+  start = purrr::map_chr(membership, &quot;membership-summary.start-date.year.value&quot;))
+
+membership$time &lt;- glue::glue(&quot;{membership$start} - {end_year}&quot;)
+glue::glue('&lt;br&gt;
+&lt;ul style=&quot;list-style-type:none;&quot;&gt;
+           &lt;li&gt;
+           &lt;em&gt;{membership$title}&lt;/em&gt;&lt;br&gt;{membership$organization} &lt;span style=&quot;float:right;&quot;&gt;{membership$time}&lt;/span&gt;
+           &lt;/li&gt;
+           &lt;/ul&gt;')
+</code></pre>
+<h1 id="i-classfas-fa-money-check-alt-fa-fwi-funding"><i class="fas fa-money-check-alt fa-fw"></i> Funding</h1>
+<pre><code class="language-{r}">funding &lt;- rorcid::orcid_fundings(params$orcid.id)
+pcodes &lt;- vapply(funding[[1]]$group$`funding-summary`, &quot;[[&quot;, 1, &quot;put-code&quot;)
+out &lt;- lapply(pcodes, function(z) orcid_fundings(params$orcid.id, put_code=z))
+amount &lt;- vapply(out, function(w) w[[1]]$amount$value, &quot;&quot;)
+amount  &lt;- paste(&quot;$&quot;, amount, sep = &quot;&quot;)
+funding &lt;- funding$`0000-0002-9583-8636`$group$`funding-summary` 
+funding &lt;- tibble(
+  type = purrr::map_chr(funding, &quot;type&quot;),
+  funder = purrr::map_chr(funding, &quot;organization.name&quot;),
+  title = purrr::map_chr(funding, &quot;title.title.value&quot;),
+  start = purrr::map_chr(funding, &quot;start-date.year.value&quot;),
+  end = purrr::map_chr(funding, &quot;end-date.year.value&quot;)) %&gt;% 
+  mutate(timeframe = glue::glue(&quot;{start} - {end}&quot;)) %&gt;% 
+  select(type, funder, title, timeframe) 
+funding$type &lt;- stringr::str_replace_all(funding$type, &quot;SALARY_AWARD&quot;, &quot;SALARY AWARD&quot;)
+funding &lt;- funding %&gt;% 
+  mutate(Amount = amount)
+
+glue::glue('&lt;br&gt;
+&lt;ul style=&quot;list-style-type:none;&quot;&gt;
+           &lt;li&gt;
+           &lt;em&gt;{funding$title}&lt;/em&gt;&lt;br&gt;{funding$funder}&lt;br&gt;{funding$Amount} &lt;span style=&quot;float:right;&quot;&gt;{funding$timeframe}&lt;/span&gt;
+           &lt;/li&gt;
+           &lt;/ul&gt;')
+</code></pre>
+<h1 id="i-classfas-fa-book-fa-fwi-publications"><i class="fas fa-book fa-fw"></i> Publications</h1>
+<pre><code class="language-{r}">id &lt;- &quot;2hpmnr8AAAAJ&quot;
+
+## Get his profile
+l &lt;- get_profile(id)
+</code></pre>
+<pre><code class="language-{r}">scholar &lt;- scholar::get_publications(id) 
+scholar$journal &lt;- recode(scholar$journal, &quot;The Cochrane Library&quot; = &quot;Cochrane Database of Systematic Reviews&quot;)
+</code></pre>
+<pre><code class="language-{r}">papers &lt;- get_num_articles(id)
+journals  &lt;- get_num_distinct_journals(id)
+</code></pre>
+<br>
+  <div class="row">
+  <div class="col-md-4">
+  <div class = "box">
+  <span style="font-size: 32px;">
+  `r papers`<br>
+  </span>
+  articles
+</div>
+  </div>
+  <div class="col-md-4">
+  <div class = "box">
+  <span style="font-size: 32px;">
+  `r l$total_cites`<br>
+  </span>
+  citations
+</div>
+  </div>
+  <div class="col-md-4">
+  <div class = "box">
+  <span style="font-size: 32px;">
+  `r l$h_index`<br>
+  </span>
+  h-index
+</div>
+  </div>
+  </div>
+  <br>
+  <div class="row">
+  <div class="col-md-6">
+  ```{r pubs, out.width="90%"}
+pubs_plot <- scholar %>% 
+  group_by(year) %>% 
+  summarise(pubsperyear = n()) %>% 
+  mutate(total = cumsum(pubsperyear)) %>% 
+  ggplot(aes(year, total)) +
+  geom_line(size=1, color='darkgrey') +
+  geom_point(size=3, color="#284260") +
+  theme_classic() +
+  labs(x= "Year", y = "Publications") +
+  scale_x_continuous(breaks = seq(2010, max(scholar$year, na.rm = TRUE), by=2))+
+  theme(axis.title  =element_text(face = "bold", size=16))
+ggplotly(pubs_plot)
+```
+</div>
+  <div class="col-md-6">
+  ```{r cites, out.width="90%"}
+ct <- get_citation_history(id)
+<h2 id="plot-citation-trend">Plot citation trend</h2>
+<p>citations_plot &lt;- ggplot(ct, aes(year, cites)) +
+geom_segment(aes(xend = year, yend = 0), size=1, color='darkgrey&rsquo;) +
+geom_point(size=3, color=&quot;DarkSlateGray&rdquo;) +
+theme_classic() +
+labs(x= &ldquo;Year&rdquo;, y = &ldquo;Citations&rdquo;)+
+theme(axis.title  =element_text(face = &ldquo;bold&rdquo;, size=16))
+ggplotly(citations_plot)</p>
+<pre><code>&lt;/div&gt;
+  &lt;/div&gt;
+  
+  ```{r }
+results &lt;- my.orcid(params$orcid.id) # single
+</code></pre>
+<pre><code class="language-{r">papers  &lt;-  my.filter(results, max.authors=params$max.authors, order=params$order,
+                      journal.only=params$journal.only, years.since=params$years.since,
+                      spacer=params$spacer, bold.author = params$bold.author)
+</code></pre>
+<h2 id="journal-articles">Journal articles</h2>
+<pre><code class="language-{r">print_papers(papers)
+</code></pre>
+<h1 id="i-classfas-fa-computer-classic-fa-fwi-software"><i class="fas fa-computer-classic fa-fw"></i> Software</h1>
+<pre><code class="language-{r}">software &lt;- tribble(~package, ~description, ~year,
+                    &quot;spiritR&quot;, &quot;A workflow to enable direct upload of a clinical trial protocol to clinicaltrials.gov
+&quot;, 2019)
+
+glue::glue('&lt;br&gt;
+  &lt;ul style=&quot;list-style-type:none;&quot;&gt;
+  &lt;li&gt;
+  &lt;a href=&quot;https://spiritr.netlify.com&quot;&gt;&lt;em&gt;{software$package}&lt;/em&gt;&lt;/a&gt;&lt;br&gt;{software$description} &lt;span style=&quot;float:right;&quot;&gt;{software$year}&lt;/span&gt;
+  &lt;/li&gt;
+  &lt;/ul&gt;')
+</code></pre>
+<h1 id="i-classfas-fa-comments-fa-fwi-peer-reviews"><i class="fas fa-comments fa-fw"></i> Peer reviews</h1>
+<pre><code class="language-{r}">reviews &lt;- orcid_peer_reviews(params$orcid.id)
+reviews_issn &lt;- reviews$`0000-0002-9583-8636`$group$`external-ids.external-id`
+
+get_title_from_issn &lt;- function(issn) {
+  tryCatch(issn_title[[issn]], error = function(e) {rcrossref::cr_journals(issn)$data$title})
+}
+
+issnfunction &lt;- function(x){
+  issn &lt;- stringr::str_remove(reviews_issn[[x]]$`external-id-value`, &quot;issn:&quot;)
+  if(issn == &quot;1532-8473&quot;) {
+    &quot;Journal of Peri-Anesthesia Nursing&quot;
+  } else if(issn == &quot;1651-2219&quot;){
+    &quot;Annals of Medicine&quot;
+  }  else if(issn == &quot;1873-491X&quot;){
+    &quot;International Journal of Nursing Studies&quot;
+  }  else if(issn == &quot;publons:Wiley&quot;){
+    &quot;Wiley journal not otherwise classified&quot;
+  }   else if(issn == &quot;1469-493X&quot;){
+    &quot;Cochrane Database of Systematic Reviews&quot;
+  }   else if(issn == &quot;1552-3799&quot;){
+    &quot;Clinical Nursing Research&quot;
+  } else if(issn == &quot;publons:Elsevier&quot;){
+    &quot;Elsevier journal not otherwise classified&quot;
+  } else if(issn == &quot;1557-3117&quot;){
+    &quot;Journal of Heart &amp; Lung Transplantation&quot;
+  }
+  else(get_title_from_issn(issn))
+}
+
+journalsReviewed &lt;- vapply(seq(1,length(reviews_issn), by = 1), issnfunction, &quot;&quot;)  
+
+reviews_per_journal  &lt;- reviews$`0000-0002-9583-8636`$group$`peer-review-group`
+
+
+
+numberReviewsFunction &lt;- function(x){
+  nrow(reviews_per_journal[[x]])
+}
+
+numberReviewed &lt;- purrr::map_dbl(seq(1,length(reviews_issn), by = 1), numberReviewsFunction)  
+reviewdf &lt;- tibble(journalsReviewed, numberReviewed)
+reviewdf$journalsReviewed &lt;- recode(reviewdf$journalsReviewed, &quot;Collegian Journal of the Royal College of Nursing Australia&quot; = &quot;Collegian&quot;)
+totalreviews &lt;- sum(reviewdf$numberReviewed)
+
+reviewdf &lt;- tibble(journalsReviewed, numberReviewed)
+reviewdf$journalsReviewed &lt;- recode(reviewdf$journalsReviewed, &quot;Collegian Journal of the Royal College of Nursing Australia&quot; = &quot;Collegian&quot;)
+
+totalreviews &lt;- sum(reviewdf$numberReviewed)
+</code></pre>
+<br>
+<br>
+  &nbsp;
+<hr />
+  <p style="text-align: center;">Created by <a href="https://www.aaronconway.info">Aaron Conway</a></p>
+  <p style="text-align: center;"><span style="color: #808080;"><em>Updated on `r format(Sys.time(), "%a %b %d %X %Y")`</em></span></p>
+<p> </p>
+
+    </div>
+  
+</div>
+
+    </div>
+  </section>
+
 
 
       
@@ -1385,7 +1771,7 @@
 
     
     
-    <script>const isSiteThemeDark = false;</script>
+    <script>const isSiteThemeDark = true;</script>
     
 
     
