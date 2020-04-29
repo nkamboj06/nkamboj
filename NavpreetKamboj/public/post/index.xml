@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8" standalone="yes" ?>
 <rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
   <channel>
-    <title>Posts | Academic</title>
+    <title>Posts | Navpreet Kamboj</title>
     <link>/post/</link>
       <atom:link href="/post/index.xml" rel="self" type="application/rss+xml" />
     <description>Posts</description>
@@ -13,7 +13,7 @@
     </image>
     
     <item>
-      <title>Writing technical content in Academic</title>
+      <title>Continous Non-invasive Arterial Pressure Monitoring</title>
       <link>/post/writing-technical-content/</link>
       <pubDate>Fri, 12 Jul 2019 00:00:00 +0000</pubDate>
       <guid>/post/writing-technical-content/</guid>

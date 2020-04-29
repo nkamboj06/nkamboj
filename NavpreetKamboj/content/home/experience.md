@@ -18,27 +18,30 @@ date_format = "Jan 2006"
 #   Leave `date_end` empty if it's your current employer.
 #   Begin/end multi-line descriptions with 3 quotes `"""`.
 [[experience]]
-  title = "CEO"
-  company = "GenCoin"
-  company_url = ""
-  location = "California"
-  date_start = "2017-01-01"
+  title = "Teaching Assistant"
+  company = "University of Toronto"
+  company_url = "https://www.utoronto.ca/"
+  location = "Toronto"
+  date_start = "2019-09-01"
   date_end = ""
-  description = """
-  Responsibilities include:
-  
-  * Analysing
-  * Modelling
-  * Deploying
-  """
+  description = """Courses: Introduction to Acute Care Nursing: Adults (Rotation 1); and Introduction to Acute Care Nursing: Adults (Rotation II)."""
 
 [[experience]]
-  title = "Professor"
-  company = "University X"
-  company_url = ""
-  location = "California"
-  date_start = "2016-01-01"
-  date_end = "2016-12-31"
-  description = """Taught electronic engineering and researched semiconductor physics."""
+  title = "Teaching Assistant"
+  company = "Western University"
+  company_url = "https://www.uwo.ca/"
+  location = "London"
+  date_start = "2017-09-01"
+  date_end = "2019-04-30"
+  description = """Courses: N1160b: Foundational Concepts of Professional Nursing II; Introduction to Health Informatics within Nursing; Health Promotion and Caring: Clients with Health Challenges I; and Health Promotion and Caring: Clients with Health Challenges II."""
+  
+[[experience]]
+  title = "Registered Nurse and Bundled Care Navigator"
+  company = "Trillium Health Partners"
+  company_url = "https://trilliumhealthpartners.ca/"
+  location = "Mississauga"
+  date_start = "2017-06-24"
+  date_end = ""
+  description = """Provides nursing assessment, care plan development, goal oriented treatment interventions, patient/family education and support to address medical cognitive, emotional and self-care needs within scope of practice."""
 
 +++

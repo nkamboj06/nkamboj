@@ -1,11 +1,11 @@
 ---
-date: "2016-04-27T00:00:00Z"
-external_link: http://example.org
+date: "2019-11-29"
+external_link: https://ir.lib.uwo.ca/cgi/viewcontent.cgi?article=9050&context=etd
 image:
-  caption: Photo by Toa Heftiba on Unsplash
+  caption: Photo by Robina Weermeijer on Unsplash
   focal_point: Smart
-summary: An example of linking directly to an external project website using `external_link`.
+summary: An exploration of how persons requiring hemodialysis treatment explain the ways in which access to transportation for such treatment influences their overall health. 
 tags:
 - Demo
-title: External Project
+title: Accesss to transportation for hemodialysis treatment.
 ---
